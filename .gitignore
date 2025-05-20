@@ -1,0 +1,21 @@
+# Python cache files
+__pycache__/
+*.pyc
+
+# Virtual environments
+env/
+venv/
+testenv/
+
+# Environment variables
+.env
+
+# Uploaded or temporary files
+uploads/
+*.log
+
+# VS Code config (optional)
+.vscode/
+
+# OS-generated files
+.DS_Store
