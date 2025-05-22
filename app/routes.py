@@ -5,3 +5,5 @@ bp = Blueprint('routes', __name__)
 @bp.route('/', methods=['GET'])
 def index():
     return "QuizMe is running!"
+
+@bp.route('/', methods=['POST'])
