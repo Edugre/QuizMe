@@ -37,3 +37,8 @@ def get_pdf_stats(file_path):
             "pages": 0,
             "approx_tokens": 0
         }
+    
+def clean_study_text(text):
+    lines = text.splitlines() 
+    cleaned_lines = [line.strip() for line in lines if line.strip()]
+    return "\n".join(cleaned_lines)
