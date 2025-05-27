@@ -1,5 +1,6 @@
 from app.logger import get_logger
 from dotenv import load_dotenv
+import json
 from openai import OpenAI
 import os
 
@@ -37,7 +38,16 @@ def generate_quiz(study_content, difficulty="medium"):
             ],
             temperature=0.7
         )
-        return response.choices[0].message.content.strip()
+        raw_quiz = response.choices[0].message.content.strip()
+        logger.info(raw_quiz)
+
+        try:
+            quiz_data = json.loads(raw_quiz)
+            return quiz_data
+        except Exception as e:
+            logger.warning("Quiz output was not valid JSON.")
+            return []
+
     except Exception as e: 
         logger.exception(f"An exception occurred while generating quiz with LLM: {e}")
         return ""

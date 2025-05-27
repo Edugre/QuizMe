@@ -31,6 +31,6 @@ def generate():
         return render_template("error.html", message="No study guide provided.")
     
     cleaned_text = clean_study_text(study_text)
-    quiz = generate_quiz(cleaned_text, difficulty)
+    quiz_data = generate_quiz(cleaned_text, difficulty)
 
-    return render_template("quiz.html", quiz=quiz, difficulty=difficulty)
+    return render_template("quiz.html", quiz=quiz_data, difficulty=difficulty)

@@ -4,8 +4,17 @@
         <title>Quiz {{ difficulty }}</title>
     </head>
     <body>
-        <h2>Generated Quiz ({{ difficulty }})</h2>
-        <pre>{{ quiz }}</pre>
-        <a href="/">Back</a>
+        {% for q in quiz %}
+        <div class="question-block">
+            <p><strong>Q{{ loop.index }}: {{ q.question }}</strong></p>
+            {% for key, option in q.options.items() %}
+                <label>
+                    <input type="radio" name="q{{ loop.index }}" value="{{ key }}">
+                    {{ key }}. {{ option }}
+                </label><br>
+                {% endfor %}
+        </div>
+        <hr>
+        {% endfor %}
     </body>
 </html>

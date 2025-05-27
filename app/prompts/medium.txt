@@ -37,17 +37,23 @@ When encountering ambiguous, incomplete, or unclear material in the study guide:
 
 If the study material lacks sufficient clarity or content to generate 10 good-quality questions, generate as many questions as can be reliably created from the material and include a brief note explaining why fewer questions were generated. 
 
-Return the quiz in the following structured format: 
-Question 1 of 10: 
-Q: [Your question here]
-A. [Option A] 
-B. [Option B]
-C. [Option C]
-D. [Option D]
-Answer: [Correct option letter]
-Explanation: [Brief explanation]
+Return the quiz in the following JSON format: 
+[
+    {
+        "question": "What is X?",
+        "options": {
+            "A": "Option 1",
+            "B": "Option 2",
+            "C": "Option 3",
+            "D": "Option 4"
+        },
+        "answer": "B",
+        "explanation": "This is the explanation."
+    },
+    ...
+]
 
-Repeat this structure for all 10 questions. Add double line breaks between questions. 
+Repeat this structure for all 10 questions. Only return a valid JSON array with 10 elements. 
 
 Each quiz should include a balanced variety of question types that test different cognitive skills and knowledge domains. For a 10-question quiz at medium difficulty, include: 
 1. knowledge/recall questions (2-3 questions)
