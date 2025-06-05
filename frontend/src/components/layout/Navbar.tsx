@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { Separator } from '../ui/separator';
-import { Menu, X, Home, Users, Settings, Mail, Info, DoorOpen } from 'lucide-react';
+import { Menu, X, Home, Settings, Mail, Info, DoorOpen } from 'lucide-react';
 import logo from '@/assets/branding/Logo.svg';
 
 export const Navbar = () => {
