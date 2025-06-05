@@ -3,7 +3,7 @@ import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { Separator } from '../ui/separator';
 import { Menu, X, Home, Users, Settings, Mail, Info, DoorOpen } from 'lucide-react';
-import logo from '@/assets/Logo.svg';
+import logo from '@/assets/branding/Logo.svg';
 
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +91,7 @@ export const Navbar = () => {
                                         );
                                     })}
 
-                                    <div className='pt-4'>
+                                    <div className='pt-4 px-4'>
                                         <Button className='w-full' onClick={() => setIsOpen(false)}>
                                             Forge a Quiz Now!
                                         </Button>
