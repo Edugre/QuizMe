@@ -51,7 +51,7 @@ export const Navbar = () => {
 
                     {/* Desktop CTA Button */}
                     <div className='hidden md:block'>
-                        <Button>Forge a Quiz Now!</Button>
+                        <Button className='cursor-pointer'>Forge a Quiz Now!</Button>
                     </div>
 
                     {/* Mobile Hamburger Menu */}
@@ -92,7 +92,7 @@ export const Navbar = () => {
                                     })}
 
                                     <div className='pt-4 px-4'>
-                                        <Button className='w-full' onClick={() => setIsOpen(false)}>
+                                        <Button className='w-full cursor-pointer' onClick={() => setIsOpen(false)}>
                                             Forge a Quiz Now!
                                         </Button>
                                     </div>

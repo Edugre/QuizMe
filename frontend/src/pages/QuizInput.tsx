@@ -11,14 +11,28 @@ export const QuizInput = () => {
     const [difficulty, setDifficulty] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
 
-    const handleFileChange = (event) => {
+    const handleFileChange = async (event) => {
         const file = event.target.files[0];
         if (file && file.type === 'application/pdf') {
             setSelectedFile(file);
+
+            const formData = new FormData();
+            formData.append('pdf', file);
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/parse-pdf', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                setStudyText(data.text);
+            } catch (err) {
+                console.error('Failed to parse PDF:', err);
+            }
         } else {
             alert('Please select a PDF file');
         }
-
     };
 
     const handleGenerateQuiz = (event) => {
@@ -66,12 +80,12 @@ export const QuizInput = () => {
                                         placeholder='Paste study guide here...'
                                         value={studyText}
                                         onChange={(e) => setStudyText(e.target.value)}
-                                        className='min-h-[300px] resize-none text-base leading-relaxed'
+                                        className='h-72 overflow-y-auto resize-none text-base leading-relaxed'
                                         maxLength={maxCharacters}
                                     />
-                                    <div className='absolute bottom-3 right-3 text-sm text-gray-500 bg-white px-2 py-1 rounded'>
+                                </div>
+                                <div className='text-right text-sm text-gray-500'>
                                         {characterCount.toLocaleString()}/{maxCharacters.toLocaleString()}
-                                    </div>
                                 </div>
                             </div>
                             
@@ -114,7 +128,7 @@ export const QuizInput = () => {
 
                             {/* OR Divider */}
                             {studyText && selectedFile && (
-                                <div className='flex items-center space-x-4'>
+                                <div className='flex hidden items-center space-x-4'>
                                     <div className='flex-1 border-t border-gray-300'></div>
                                     <span className='text-sm text-gray-500 bg-gray-50 px-3 py-1 rounded'>
                                         Text and PDF will be combined
@@ -126,7 +140,7 @@ export const QuizInput = () => {
                             {/* Generate Button */}
                             <Button 
                                 onClick={handleGenerateQuiz}
-                                className='w-full h-12 text-lg font-semibold'
+                                className='w-full h-12 text-lg font-semibold cursor-pointer'
                                 disabled={!studyText.trim() && !selectedFile} >
                                     Generate Quiz Now!
                             </Button>

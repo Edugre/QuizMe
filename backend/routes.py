@@ -41,9 +41,9 @@ def parse_pdf():
     with tempfile.NamedTemporaryFile(delete=False) as temp_pdf:
         file.save(temp_pdf.name)
         study_text = extract_pdf_text(temp_pdf.name)
+        stats = get_pdf_stats(temp_pdf.name)
         os.unlink(temp_pdf.name)
     
     cleaned_text = clean_study_text(study_text)
-    stats = get_pdf_stats(cleaned_text)
 
     return jsonify({"text": cleaned_text, "stats": stats})
