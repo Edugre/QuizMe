@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import Layout from './components/layout/layout'
-import './App.css'
-import './index.css'
+import { useState } from 'react';
+import { QuizInput } from './pages/QuizInput';
+import './App.css';
+import './index.css';
 
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <Layout />
+      <QuizInput />    
     </>
   )
 }
