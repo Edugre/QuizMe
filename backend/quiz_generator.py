@@ -1,4 +1,4 @@
-from app.logger import get_logger
+from backend.logger import get_logger
 from dotenv import load_dotenv
 import json
 from openai import OpenAI

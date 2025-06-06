@@ -18,6 +18,7 @@ export const QuizInput = () => {
         } else {
             alert('Please select a PDF file');
         }
+
     };
 
     const handleGenerateQuiz = (event) => {
