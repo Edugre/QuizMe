@@ -5,11 +5,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
 import { Upload, FileText} from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const QuizInput = () => {
     const [studyText, setStudyText] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
+    const navigate = useNavigate();
 
     const handleFileChange = async (event) => {
         const file = event.target.files[0];
@@ -35,7 +37,9 @@ export const QuizInput = () => {
         }
     };
 
-    const handleGenerateQuiz = (event) => {
+    const handleGenerateQuiz = async (event) => {
+        const formData = new FormData();
+
         if (!studyText.trim() && ! selectedFile) {
             alert('Please paste study content or upload a PDF file');
             return;
@@ -44,12 +48,23 @@ export const QuizInput = () => {
             alert('Please select a difficulty level');
             return;
         }
+        formData.append('difficulty', difficulty);
+        formData.append('study_text', studyText);
 
-        console.log('Generating quiz with:', {
-            text: studyText,
-            difficulty: difficulty,
-            file: selectedFile
-        });
+        try {
+            const response = await fetch('http://127.0.0.1:5000/generate-quiz', {
+                method: 'POST',
+                body: formData
+            }); 
+            
+            const quizData = await response.json();
+
+            navigate('/quiz', { state: { quiz: quizData } });
+        } catch (err) {
+            console.error('Failed to generate quiz:', err);
+        }
+        
+        
     };
 
     const characterCount = studyText.length;

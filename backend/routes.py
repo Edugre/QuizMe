@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from backend.file_parser import extract_pdf_text, get_pdf_stats, clean_study_text
-from backend.quiz_generator import generate_quiz
+from backend.quiz_generator import generate
 import os 
 import tempfile
 
@@ -24,7 +24,7 @@ def generate_quiz():
         return jsonify({"error": "No study guide provided"})
     
     cleaned_text = clean_study_text(study_text)
-    quiz_data = generate_quiz(cleaned_text, difficulty)
+    quiz_data = generate(cleaned_text, difficulty)
 
     return jsonify({"quiz": quiz_data, "difficulty": difficulty})
 
