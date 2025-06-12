@@ -6,11 +6,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent } from '@/components/ui/card';
 import { Upload, FileText} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { LoadingModal } from '@/components/layout/LoadingModal';
 
 export const QuizInput = () => {
     const [studyText, setStudyText] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const handleFileChange = async (event) => {
@@ -51,6 +54,7 @@ export const QuizInput = () => {
         formData.append('difficulty', difficulty);
         formData.append('study_text', studyText);
 
+        setIsLoading(true);
         try {
             const response = await fetch('http://127.0.0.1:5000/generate-quiz', {
                 method: 'POST',
@@ -62,9 +66,9 @@ export const QuizInput = () => {
             navigate('/quiz', { state: { quiz: quizData } });
         } catch (err) {
             console.error('Failed to generate quiz:', err);
+        } finally {
+            setIsLoading(false);
         }
-        
-        
     };
 
     const characterCount = studyText.length;
@@ -74,6 +78,7 @@ export const QuizInput = () => {
 
     return (
         <Layout>
+            {isLoading && <LoadingModal />}
             <div className='min-h-screen bg-gray-50'>
                 {/* Header */}
                 <div className='flex flex-col items-center justify-center pt-12 pb-8 space-y-4'>
