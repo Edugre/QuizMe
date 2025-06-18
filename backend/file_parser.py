@@ -1,4 +1,4 @@
-from app.logger import get_logger
+from backend.logger import get_logger
 import pdfplumber 
 
 logger = get_logger(__name__)

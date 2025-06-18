@@ -1,5 +1,5 @@
-from app.file_parser import extract_pdf_text, get_pdf_stats
-from app.logger import get_logger 
+from backend.file_parser import extract_pdf_text, get_pdf_stats
+from backend.logger import get_logger 
 
 logger = get_logger(__name__)
 

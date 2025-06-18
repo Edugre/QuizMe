@@ -1,4 +1,4 @@
-from app.logger import get_logger
+from backend.logger import get_logger
 from dotenv import load_dotenv
 import json
 from openai import OpenAI
@@ -10,13 +10,13 @@ logger = get_logger(__name__)
 def load_prompt(difficulty): 
     try: 
         # Load prompt template based on chosen difficulty
-        with open(f"app/prompts/{difficulty}.txt", "r") as file: 
+        with open(f"backend/prompts/{difficulty}.txt", "r") as file: 
             return file.read()
     except Exception as e: 
         logger.exception(f"Failed to load prompt template while generating quiz: {e}")
         return "" 
 
-def generate_quiz(study_content, difficulty="medium"):
+def generate(study_content, difficulty="medium"):
     try:
         prompt_template = load_prompt(difficulty) # Load the appropiate prompt template
 
